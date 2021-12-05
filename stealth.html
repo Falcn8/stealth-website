@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <title>STEALTH</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+        body, h1, h5 { font-family: "Raleway", sans-serif }
+        body, html { height: 100% }
+        .bgimg {
+            background-image: url('https://hexa.wants-to.party/stealth-name.jpg');
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+    <body>
+        <div class="bgimg w3-display-container w3-text-white">
+        <div class="w3-display-topleft w3-container w3-xlarge">
+            <p><button class="w3-button w3-black"><a href="https://hexa.wants-to.party/stealth-teaser.mp4" style="text-decoration:none" target="_blank">Teaser Video</a></button></p>
+            <p><button class="w3-button w3-black"><a href="https://discord.com/api/oauth2/authorize?client_id=805634438851592232&permissions=8&scope=bot%20applications.commands" style="text-decoration:none" target="_blank">Invite Bot</a></button></p>
+            <p><button onclick="document.getElementById('commands').style.display='block'" class="w3-button w3-black">Bot Commands</button></p>
+        </div>
+        <div class="w3-display-bottomleft w3-container">
+            <p class="w3-large" id="stats"><span id="servers">ERROR</span> servers | <span id="users">ERROR</span> users | <span id="channels">ERROR</span> channels</p>
+            <p>created by <a href="https://hexadev.ga" target="_blank">hexadev.ga</a></p>
+        </div>
+        </div>
+
+        <!-- Commands Modal -->
+        <div id="commands" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-black">
+                    <span onclick="document.getElementById('commands').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Stealth Commands</h1>
+                </div>
+                <div class="w3-container" id="commandlist">
+                    <h5>/agify</h5>
+                    <h5>/nationalize</h5>
+                    <h5>/genderize</h5>
+                    <h5>/bored</h5>
+                    <h5>/covid</h5>
+                    <h5>/dog</h5>
+                    <h5>/duck</h5>
+                    <h5>/fox</h5>
+                    <h5>/cat</h5>
+                    <h5>/joke</h5>
+                    <h5>/short</h5>
+                    <h5>/timestamp</h5>
+                    <h5>/avatar</h5>
+                    <h5>/meme</h5>
+                    <h5>/ip</h5>
+                    <h5>/hash</h5>
+                    <h5>/userinfo</h5>
+                    <h5>/identity</h5>
+                    <h5>/minecraft</h5>
+                    <h5>/vc</h5>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+    <script>
+        function getServers() {
+            url = "https://database-personal-hexagon.herokuapp.com/stealth/servers/count";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", url, false );
+            xmlHttp.send( null );
+            while (xmlHttp.readyState != 4) {
+                xmlHttp.waitForResponse(100);
+            }
+            return xmlHttp.responseText;
+        }
+
+        function getUsers() {
+            url = "https://database-personal-hexagon.herokuapp.com/stealth/users/count";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", url, false );
+            xmlHttp.send( null );
+            while (xmlHttp.readyState != 4) {
+                xmlHttp.waitForResponse(100);
+            }
+            return xmlHttp.responseText;
+        }
+
+        function getChannels() {
+            url = "https://database-personal-hexagon.herokuapp.com/stealth/channels/count";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", url, false );
+            xmlHttp.send( null );
+            while (xmlHttp.readyState != 4) {
+                xmlHttp.waitForResponse(100);
+            }
+            return xmlHttp.responseText;
+        }
+
+        function getCommands() {
+            url = "https://database-personal-hexagon.herokuapp.com/stealth/commands/get";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", url, false );
+            xmlHttp.send( null );
+            while (xmlHttp.readyState != 4) {
+                xmlHttp.waitForResponse(100);
+            }
+            return xmlHttp.responseText;
+        }
+
+        if (parseInt(String(getServers()), 10) <= 75) {
+            document.getElementById("stats").innerHTML = getServers()+' servers | depricated users | '+getChannels()+' channels';
+        }
+        else {
+            document.getElementById("stats").innerHTML = getServers()+' servers | '+getUsers()+' users | '+getChannels()+' channels';
+        }
+
+        document.getElementById("commandlist").innerHTML = getCommands();
+    </script>
+</html>
